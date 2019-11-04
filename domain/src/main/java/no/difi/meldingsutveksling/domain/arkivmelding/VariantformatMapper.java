@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import no.arkivverket.standarder.noark5.metadatakatalog.Variantformat;
 import no.difi.meldingsutveksling.HashBiMap;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 @Slf4j
 public class VariantformatMapper {
 
@@ -19,15 +21,15 @@ public class VariantformatMapper {
     }
 
     public static String getNoarkType(Variantformat vf) {
-        if (!mapper.containsValue(vf)) {
-            log.warn("Variantformat \"{}\" not found in map, defaulting to \"{}\"", vf.value(), Variantformat.PRODUKSJONSFORMAT.value());
+        if (vf == null || !mapper.containsValue(vf)) {
+            log.warn("Variantformat \"{}\" not found in map, defaulting to \"{}\"", vf, Variantformat.PRODUKSJONSFORMAT.value());
             return mapper.inverse().get(vf);
         }
         return mapper.inverse().get(vf);
     }
 
     public static Variantformat getArkivmeldingType(String veVariant) {
-        if (!mapper.containsKey(veVariant)) {
+        if (isNullOrEmpty(veVariant) || !mapper.containsKey(veVariant)) {
             log.warn("Variantformat \"{}\" not found in map, defaulting to \"{}\"", veVariant, Variantformat.PRODUKSJONSFORMAT.value());
             return Variantformat.PRODUKSJONSFORMAT;
         }

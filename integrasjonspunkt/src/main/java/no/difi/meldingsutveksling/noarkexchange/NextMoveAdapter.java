@@ -15,6 +15,7 @@ import no.difi.meldingsutveksling.dokumentpakking.service.SBDFactory;
 import no.difi.meldingsutveksling.domain.MeldingsUtvekslingRuntimeException;
 import no.difi.meldingsutveksling.domain.Organisasjonsnummer;
 import no.difi.meldingsutveksling.domain.arkivmelding.ArkivmeldingFactory;
+import no.difi.meldingsutveksling.domain.arkivmelding.ArkivmeldingFactoryKt;
 import no.difi.meldingsutveksling.domain.sbdh.StandardBusinessDocument;
 import no.difi.meldingsutveksling.nextmove.ArkivmeldingKvitteringMessage;
 import no.difi.meldingsutveksling.nextmove.ArkivmeldingMessage;
@@ -44,6 +45,7 @@ public class NextMoveAdapter {
 
     private final NextMoveMessageService nextMoveMessageService;
     private final ArkivmeldingFactory arkivmeldingFactory;
+    private final ArkivmeldingFactoryKt arkivmeldingFactoryKt;
     private final SBDFactory createSBD;
     private final IntegrasjonspunktProperties properties;
     private final UUIDGenerator uuidGenerator;
@@ -156,7 +158,8 @@ public class NextMoveAdapter {
     }
 
     private BasicNextMoveFile getArkivmeldingFile(PutMessageRequestWrapper message) throws JAXBException {
-        Arkivmelding arkivmelding = arkivmeldingFactory.from(message);
+//        Arkivmelding arkivmelding = arkivmeldingFactory.from(message);
+        Arkivmelding arkivmelding = arkivmeldingFactoryKt.from(message);
         byte[] arkivmeldingBytes = arkivmeldingUtil.marshalArkivmelding(arkivmelding);
         return BasicNextMoveFile.of(ARKIVMELDING_FILE,
                 ARKIVMELDING_FILE, MimeTypeExtensionMapper.getMimetype("xml"), arkivmeldingBytes);
