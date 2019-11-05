@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import no.arkivverket.standarder.noark5.metadatakatalog.Journalstatus;
 import no.difi.meldingsutveksling.HashBiMap;
 
-import static org.assertj.core.util.Strings.isNullOrEmpty;
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 @Slf4j
 public class JournalstatusMapper {
