@@ -10,6 +10,7 @@ import no.difi.meldingsutveksling.arkivmelding.ArkivmeldingUtil
 import no.difi.meldingsutveksling.domain.sbdh.SBDUtil
 import no.difi.meldingsutveksling.domain.sbdh.StandardBusinessDocument
 import no.difi.meldingsutveksling.exceptions.DuplicateFilenameException
+import no.difi.meldingsutveksling.exceptions.MissingFileException
 import no.difi.meldingsutveksling.exceptions.MissingFileTitleException
 import no.difi.meldingsutveksling.nextmove.ArkivmeldingMessage
 import no.difi.meldingsutveksling.nextmove.BusinessMessageFile
@@ -61,12 +62,13 @@ class NextMoveValidatorTest {
         every { message.businessMessage } returns businessMessage
     }
 
-    @Test
+    @Test(expected = MissingFileException::class)
     fun `non-receipt messages must have attachments`() {
         val sbd = mockk<StandardBusinessDocument>()
         every { message.sbd } returns sbd
         every { sbdUtil.isReceipt(sbd) } returns false
-
+        every { message.files } returns emptySet()
+        nextMoveValidator.validate(message)
     }
 
     @Test(expected = DuplicateFilenameException::class)
