@@ -24,7 +24,7 @@ public class PayloadUtilTest {
     public void appReceiptMedFeilmeldingIsNotOkType() throws JAXBException, XMLStreamException {
         PutMessageRequestType value = testData.loadFromClasspath("p360/PutMessageAppReceiptFeilmelding.xml");
 
-        final AppReceiptType appReceiptType = PayloadUtil.getAppReceiptType(value.getPayload());
+        final AppReceiptType appReceiptType = PayloadUtilKt.getAppReceiptType(value.getPayload());
         assertFalse(appReceiptType.getType().equals("OK"));
     }
 
@@ -34,28 +34,28 @@ public class PayloadUtilTest {
 
         String payload = StringEscapeUtils.unescapeHtml((String) value.getPayload());
 
-        assertNotNull(PayloadUtil.getAppReceiptType(payload));
+        assertNotNull(PayloadUtilKt.getAppReceiptType(payload));
     }
 
     @Test
     public void isAppReceiptPutMessageFromEphorte() throws Exception {
         PutMessageRequestType value = testData.loadFromClasspath("ephorte/PutMessageMessage.xml");
 
-        assertFalse(PayloadUtil.isAppReceipt(value.getPayload()));
+        assertFalse(PayloadUtilKt.isAppReceipt(value.getPayload()));
     }
 
     @Test
     public void isAppReceiptAppreceiptFrom360() throws JAXBException, XMLStreamException {
         final PutMessageRequestType putMessageRequestType = testData.loadFromClasspath("p360/OKPutMessageAppReceipt.xml");
 
-        assertTrue(PayloadUtil.isAppReceipt(putMessageRequestType.getPayload()));
+        assertTrue(PayloadUtilKt.isAppReceipt(putMessageRequestType.getPayload()));
     }
 
     @Test
     public void getOKAppReceiptTypeFromP360() throws JAXBException, XMLStreamException {
         final PutMessageRequestType putMessageRequestType = testData.loadFromClasspath("p360/OKPutMessageAppReceipt.xml");
 
-        final AppReceiptType appReceiptType = PayloadUtil.getAppReceiptType(putMessageRequestType.getPayload());
+        final AppReceiptType appReceiptType = PayloadUtilKt.getAppReceiptType(putMessageRequestType.getPayload());
         assertNotNull(appReceiptType);
         assertTrue(appReceiptType.getType().equals("OK"));
     }
@@ -64,13 +64,13 @@ public class PayloadUtilTest {
     public void isAppReceiptAppreceiptFromEphorte() throws JAXBException, XMLStreamException {
         final PutMessageRequestType putMessageRequestType = testData.loadFromClasspath("ephorte/PutMessageAppReceipt.xml");
 
-        assertTrue(PayloadUtil.isAppReceipt(putMessageRequestType.getPayload()));
+        assertTrue(PayloadUtilKt.isAppReceipt(putMessageRequestType.getPayload()));
     }
 
     @Test
     public void isEmptyPayloadFromEphorte() throws JAXBException, XMLStreamException {
         final PutMessageRequestType putMessageRequestType = testData.loadFromClasspath("ephorte/PutMessageEmptyPayload.xml");
 
-        assertTrue(PayloadUtil.isEmpty(putMessageRequestType.getPayload()));
+        assertTrue(PayloadUtilKt.isEmpty(putMessageRequestType.getPayload()));
     }
 }

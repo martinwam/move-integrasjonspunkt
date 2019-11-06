@@ -24,24 +24,15 @@ import org.junit.Test
 @Slf4j
 class NextMoveValidatorTest {
 
-    @MockK
-    lateinit var nextMoveServiceRecordProvider: NextMoveServiceRecordProvider
-    @MockK
-    lateinit var nextMoveMessageOutRepository: NextMoveMessageOutRepository
-    @MockK
-    lateinit var serviceIdentifierService: ServiceIdentifierService
-    @MockK
-    lateinit var asserter: Asserter
-    @MockK
-    lateinit var optionalCryptoMessagePersister: OptionalCryptoMessagePersister
-    @MockK
-    lateinit var timeToLiveHelper: TimeToLiveHelper
-    @MockK
-    lateinit var sbdUtil: SBDUtil
-    @MockK
-    lateinit var conversationService : ConversationService
-    @MockK
-    lateinit var arkivmeldingUtil: ArkivmeldingUtil
+    @MockK lateinit var nextMoveServiceRecordProvider: NextMoveServiceRecordProvider
+    @MockK lateinit var nextMoveMessageOutRepository: NextMoveMessageOutRepository
+    @MockK lateinit var serviceIdentifierService: ServiceIdentifierService
+    @MockK lateinit var asserter: Asserter
+    @MockK lateinit var optionalCryptoMessagePersister: OptionalCryptoMessagePersister
+    @MockK lateinit var timeToLiveHelper: TimeToLiveHelper
+    @MockK lateinit var sbdUtil: SBDUtil
+    @MockK lateinit var conversationService : ConversationService
+    @MockK lateinit var arkivmeldingUtil: ArkivmeldingUtil
 
     lateinit var nextMoveValidator : NextMoveValidator
 
