@@ -6,7 +6,6 @@
 trigger:
 - master
 - development
-- azure_devops_test
 
 pool:
   vmImage: 'ubuntu-latest'
