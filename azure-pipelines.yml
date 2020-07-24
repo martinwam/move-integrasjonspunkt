@@ -4,6 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
+- master
+- development
 - azure_devops_test
 
 pool:
